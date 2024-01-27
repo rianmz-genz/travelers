@@ -65,6 +65,7 @@ const CreateTravelForm = ({ onSubmit }) => {
             name={name}
             placeholder={placeholder}
             label={label}
+            type={name == "price" ? "number" : "text"}
           />
         ))}
         <InputTitle name={"thumbnail"} label={"Thumbnail"} type={"file"} />
