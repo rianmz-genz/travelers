@@ -58,7 +58,7 @@ const CreateTravelForm = ({ onSubmit }) => {
       onSubmit={onSubmit}
       className="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6"
     >
-      <div className="grid grid-cols-2 gap-3 mb-3">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
         {fields.map(({ name, label, placeholder }, index) => (
           <InputTitle
             key={index}

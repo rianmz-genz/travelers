@@ -11,7 +11,6 @@ const TravelTable = ({ datas, onDelete }) => {
           <tr className="bg-black text-white">
             <th className="text-base"></th>
             <th className="text-base">Judul</th>
-            <th className="text-base">Deskripsi</th>
             <th className="text-base">Aksi</th>
           </tr>
         </thead>
@@ -23,7 +22,6 @@ const TravelTable = ({ datas, onDelete }) => {
                 <tr key={index}>
                   <th>{index + 1}</th>
                   <td>{travel.title}</td>
-                  <td>{travel.description}</td>
                   <td>
                     <PrimaryButton onClick={() => onDelete(travel.id)}>
                       <FiTrash />
