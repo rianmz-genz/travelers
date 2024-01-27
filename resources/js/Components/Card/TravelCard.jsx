@@ -6,11 +6,11 @@ function TravelCard({ src, title, rating, rating_count, id, price }) {
   return (
     <Link href={route("travel.detail", id)}>
       <div className="w-full rounded-lg overflow-hidden shadow">
-        <img src={src} alt={title} />
+        <img src={src} alt={title} className="w-full object-cover" />
         <div className="p-4 bg-white ">
           <p className="font-bold text-lg">{title}</p>
           <Rating rating={rating} rating_count={rating_count} />
-          <p>Rp. {price.toLocaleString('id-ID')}</p>
+          <p>Rp. {price.toLocaleString("id-ID")}</p>
         </div>
       </div>
     </Link>

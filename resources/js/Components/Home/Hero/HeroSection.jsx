@@ -32,19 +32,22 @@ const HeroSection = () => {
       </article>
       <div className="absolute w-full pb-32 bg-[#F7F9FA] top-[90%] rounded-t-[40px] md:rounded-t-[90px] text-black px-7">
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-16">
-          <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-bold">Travel terbaik untuk mu!</h1>
+          <div className="flex items-center justify-between md:flex-row flex-col w-full">
+            <h1 className="text-2xl font-bold mb-3 md:mb-0">
+              Travel terbaik untuk mu!
+            </h1>
             <form
               onSubmit={searchTravel}
-              className="flex justify-center items-center gap-3 w-6/12"
+              className="flex justify-center items-center gap-3 w-full md:w-6/12"
             >
               <Input
                 onChange={(e) => setKeyword(e.target.value)}
                 value={keyword}
                 type={"search"}
-                placeholder={"Cari trip/travel berdasarkan nama"}
+                className="text-sm"
+                placeholder={"Cari berdasarkan nama"}
               />
-              <button className="flex px-4 py-2 bg-blue-500 text-white items-center justify-center gap-2 rounded-md">
+              <button className="flex px-2 py-1 md:px-4 md:py-2 bg-blue-500 text-white items-center justify-center gap-2 rounded-md">
                 <LuSearch />
                 Cari
               </button>

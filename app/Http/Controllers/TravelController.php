@@ -14,7 +14,7 @@ class TravelController extends Controller
 {
 
     public function index(): JsonResponse {
-        $travels = Travel::with('ratings')->get();
+        $travels = Travel::with('ratings')->orderBy('id', 'DESC')->get();
         return response()->json(new TravelCollection($travels), 200);
     }
 
@@ -26,6 +26,7 @@ class TravelController extends Controller
         if ($name) {
             // If a name is provided, search travels by name
             $travels = Travel::where('title', 'like', '%' . $name . '%')
+            ->orderBy('id', 'DESC')
             ->with('ratings')
             ->get();
             $totalData = $travels->count();
@@ -36,7 +37,7 @@ class TravelController extends Controller
             }
         } else {
             // If no name is provided, return all travels
-            $travels = Travel::with('ratings')->get();
+            $travels = Travel::with('ratings')->orderBy('id', 'DESC')->get();
             $message = 'Semua travel yang tersedia disini.';
         }
 
