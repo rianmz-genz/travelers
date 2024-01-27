@@ -39,7 +39,7 @@ class RatingController extends Controller
             'name' => $request->input('name'),
             'comment' => $request->input('comment'),
             'rating' => $request->input('rating'),
-            'images' => json_encode($imagePaths),
+            'images' => $imagePaths,
             'travel_id' => $request->input('travel_id'),
         ]);
 

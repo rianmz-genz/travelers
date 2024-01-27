@@ -15,8 +15,41 @@ class TravelController extends Controller
 
     public function index(): JsonResponse {
         $travels = Travel::with('ratings')->get();
-        
         return response()->json(new TravelCollection($travels), 200);
+    }
+
+    public function all(Request $request) {
+        $name = $request->travel;
+        $message = '';
+        $travels = [];
+    
+        if ($name) {
+            // If a name is provided, search travels by name
+            $travels = Travel::where('title', 'like', '%' . $name . '%')
+            ->with('ratings')
+            ->get();
+            $totalData = $travels->count();
+            if($totalData == 0) {
+                $message = 'Berikut pencarian ' . $name . ' tidak ditemukan ' ;
+            } else {
+                $message = 'Berikut pencarian ' . $name . ' ditemukan ' . $totalData ;
+            }
+        } else {
+            // If no name is provided, return all travels
+            $travels = Travel::with('ratings')->get();
+            $message = 'Semua travel yang tersedia disini.';
+        }
+
+        if (!$name && $travels->count() == 0) {
+            $message = 'Masih belum ada travel/trip.';
+        }
+        
+        $props = [
+            'travels' => new TravelCollection($travels),
+            'message' =>  $message
+        ];
+    
+        return Inertia::render('Travel/All', $props); 
     }
 
     public function dashboard() {
@@ -41,6 +74,7 @@ class TravelController extends Controller
             'subdistrict' => 'required|string',
             'regency' => 'required|string',
             'province' => 'required|string',
+            'price' => 'required|integer',
         ]);
 
         // Cek validasi
@@ -66,12 +100,13 @@ class TravelController extends Controller
             'title' => $request->input('title'),
             'description' => $request->input('description'),
             'thumbnail' => $uploadedThumbnail,
-            'images' => json_encode($imagePaths),
+            'images' => $imagePaths,
             'address' => $request->input('address'),
             'ward' => $request->input('ward'),
             'subdistrict' => $request->input('subdistrict'),
             'regency' => $request->input('regency'),
             'province' => $request->input('province'),
+            'price' => $request->input('price'),
         ]);
         return redirect()->route('travel.dashboard.index');
     }

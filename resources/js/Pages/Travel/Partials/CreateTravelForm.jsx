@@ -9,6 +9,11 @@ const fields = [
     placeholder: "Input Title",
   },
   {
+    name: "price",
+    label: "Harga",
+    placeholder: "Input Harga",
+  },
+  {
     name: "description",
     label: "Deskripsi",
     placeholder: "Input Deskripsi",
@@ -55,7 +60,12 @@ const CreateTravelForm = ({ onSubmit }) => {
     >
       <div className="grid grid-cols-2 gap-3 mb-3">
         {fields.map(({ name, label, placeholder }, index) => (
-          <InputTitle name={name} placeholder={placeholder} label={label} />
+          <InputTitle
+            key={index}
+            name={name}
+            placeholder={placeholder}
+            label={label}
+          />
         ))}
         <InputTitle name={"thumbnail"} label={"Thumbnail"} type={"file"} />
       </div>

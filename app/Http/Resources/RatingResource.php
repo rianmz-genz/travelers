@@ -19,7 +19,7 @@ class RatingResource extends JsonResource
             'name' => $this->name,
             'comment' => $this->comment,
             'rating' => $this->rating,
-            'images' => json_decode($this->images),
+            'images' => $this->images,
             'created_at' => $this->created_at
         ];
     }

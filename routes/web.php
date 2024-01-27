@@ -43,6 +43,7 @@ Route::middleware('auth')->group(function () {
 
 });
 Route::get('/travels', [TravelController::class, 'index'])->name('travel.index');
+Route::get('/travels/all', [TravelController::class, 'all'])->name('travel.all');
 Route::get('/travels/{id}', [TravelController::class, 'detail'])->name('travel.detail');
 
 Route::post('/ratings', [RatingController::class, 'store'])->name('rating.store');

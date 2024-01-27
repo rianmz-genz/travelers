@@ -17,7 +17,7 @@ const ListRating = ({ ratings }) => {
 
   const renderedRatings = ratings.slice(0, visibleCount);
   return (
-    <div className="w-9/12 mx-auto">
+    <div className="md:w-9/12 w-full mx-auto">
       {renderedRatings.length === 0 ? (
         <p className="text-center">Belum ada review</p>
       ) : (
@@ -26,22 +26,25 @@ const ListRating = ({ ratings }) => {
           {renderedRatings.map((rating) => (
             <div
               key={rating.id}
-              className="bg-white shadow w-full px-4 py-2 mb-3 rounded-lg text-black"
+              className="bg-white shadow w-full md:px-4 md:py-2 p-2 mb-3 rounded-lg text-black"
             >
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between md:flex-row flex-col">
                 <p>
                   <Rating rating={rating.rating} />
                 </p>
                 <p>{rating.name}</p>
               </div>
               <div>
-                <p>{rating.comment}</p>
+                <p className="my-2">{rating.comment}</p>
                 <div className="flex flex-wrap gap-2">
                   <Each
                     of={rating.images}
                     render={(image) => (
                       <a href={image} target="_blank">
-                        <img src={image} className="rounded-md w-28" />
+                        <img
+                          src={image}
+                          className="rounded-md w-20 md:w-24 lg:28"
+                        />
                       </a>
                     )}
                   />

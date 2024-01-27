@@ -18,12 +18,19 @@ const CreateRatingForm = ({ onSubmit, travelId }) => {
     setImages(images.filter((_, index) => index !== i));
   };
   return (
-    <form onSubmit={onSubmit} className="py-8">
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        if (rating == 0) return;
+        onSubmit(e);
+      }}
+      className="py-8"
+    >
       <input type="hidden" value={travelId} name="travel_id" />
       <h1 className="absolute top-0 left-0 bg-neutral text-white px-4 py-2 rounded-br-lg">
         Buat Review
       </h1>
-      <div className="grid grid-cols-2 gap-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
         <InputTitle
           label={"Nama"}
           name={"name"}
@@ -41,7 +48,7 @@ const CreateRatingForm = ({ onSubmit, travelId }) => {
           required
         />
       </div>
-      <div className="flex flex-wrap items-center justify-start gap-2">
+      <div className="flex flex-wrap items-center justify-start gap-2 mb-3">
         {images.map((_, index) => (
           <div className="flex justify-center items-center w-fit my-2">
             <InputTitle

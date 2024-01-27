@@ -72,7 +72,7 @@ const DetailRating = ({ travelId, ratings, isSuccess, rating }) => {
   ];
   return (
     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-      <div className="p-6 relative">
+      <div className=" px-4 py-12 md:p-6 relative">
         {!isSuccess && (
           <PrimaryButton
             onClick={() => setIsCreateMode((prev) => !prev)}
@@ -81,40 +81,45 @@ const DetailRating = ({ travelId, ratings, isSuccess, rating }) => {
             {isCreateMode ? "Batalkan" : "Buat Review"}
           </PrimaryButton>
         )}
-        <div className="flex w-9/12 mx-auto items-start justify-between mb-6">
-          <div className=" w-6/12">
-            <div className="flex items-end justify-start">
-              <h1 className="text-5xl font-bold text-black">4.9</h1>
-              <p>/5</p>
-            </div>
-            <div className="flex gap-2 items-center mt-3">
-              <FaStar style={{ color: "#f9c32f", fontSize: "1.3rem" }} />
-              <FaStar style={{ color: "#f9c32f", fontSize: "1.3rem" }} />
-              <FaStar style={{ color: "#f9c32f", fontSize: "1.3rem" }} />
-              <FaStar style={{ color: "#f9c32f", fontSize: "1.3rem" }} />
-              <FaStar style={{ color: "#f9c32f", fontSize: "1.3rem" }} />
-            </div>
-          </div>
 
-          <div className="w-6/12">
-            <Each
-              of={stars}
-              render={(star, index) => (
-                <div key={index} className="mb-1">
-                  <RatingItem
-                    label={star.label}
-                    percent={star.percent}
-                    totalData={star.totalData}
-                  />
-                </div>
-              )}
-            />
-          </div>
-        </div>
         {isCreateMode ? (
           <CreateRatingForm travelId={travelId} onSubmit={onSubmit} />
         ) : (
-          <ListRating ratings={ratings} />
+          <>
+            <div className="flex md:w-9/12 mx-auto items-start justify-between mb-6">
+              <div className=" w-6/12">
+                <div className="flex items-end justify-start">
+                  <h1 className="md:text-5xl text-4xl font-bold text-black">
+                    4.9
+                  </h1>
+                  <p>/5</p>
+                </div>
+                <div className="flex gap-2 items-center mt-3">
+                  <FaStar style={{ color: "#f9c32f", fontSize: "1.3rem" }} />
+                  <FaStar style={{ color: "#f9c32f", fontSize: "1.3rem" }} />
+                  <FaStar style={{ color: "#f9c32f", fontSize: "1.3rem" }} />
+                  <FaStar style={{ color: "#f9c32f", fontSize: "1.3rem" }} />
+                  <FaStar style={{ color: "#f9c32f", fontSize: "1.3rem" }} />
+                </div>
+              </div>
+
+              <div className="w-6/12">
+                <Each
+                  of={stars}
+                  render={(star, index) => (
+                    <div key={index} className="mb-1">
+                      <RatingItem
+                        label={star.label}
+                        percent={star.percent}
+                        totalData={star.totalData}
+                      />
+                    </div>
+                  )}
+                />
+              </div>
+            </div>
+            <ListRating ratings={ratings} />
+          </>
         )}
       </div>
     </div>
@@ -131,7 +136,7 @@ function RatingItem({ percent, totalData, label }) {
       <div className="w-full h-2 bg-slate-100 rounded-full relative overflow-hidden">
         <div style={{ width: percent }} className={`h-2 bg-yellow-300`}></div>
       </div>
-      <p>({totalData})</p>
+      <p className="text-xs md:text-base">({totalData})</p>
     </div>
   );
 }

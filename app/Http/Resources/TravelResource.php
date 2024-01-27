@@ -24,9 +24,10 @@ class TravelResource extends JsonResource
             'subdistrict' => $this->subdistrict,
             'regency' => $this->regency,
             'province' => $this->province,
-            'images' => json_decode($this->images),
+            'images' => $this->images,
             'rating' => $this->rating ?? 0, 
             'rating_count' => $this->rating_count ?? 0,
+            'price' => $this->price ?? 0,
             'ratings' => RatingResource::collection($this->ratings),
         ];
     }

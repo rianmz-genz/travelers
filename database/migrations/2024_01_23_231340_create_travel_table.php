@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('province');
             $table->integer('rating_count')->nullable();
             $table->integer('rating')->nullable();
+            $table->integer('price');
             $table->timestamps();
         });
     }

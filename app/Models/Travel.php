@@ -25,7 +25,8 @@ class Travel extends Model
         'province',
         'images',
         'rating',
-        'rating_count'
+        'rating_count',
+        'price'
     ];
     protected $casts = [
         'images' => 'array'

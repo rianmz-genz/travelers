@@ -7,14 +7,15 @@ const useTravels = () => {
 
   async function getTravels() {
     try {
-        setIsLoading(true)
-        const response = await fetch("/travels");
-        const data = await response.json();
-        setTravels(data);
+      setIsLoading(true);
+      const response = await fetch("/travels");
+      const data = await response.json();
+      console.log(data);
+      setTravels(data);
     } catch (error) {
-        throw new Error(error)
+      throw new Error(error);
     } finally {
-        setIsLoading(false)
+      setIsLoading(false);
     }
   }
 
