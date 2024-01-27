@@ -6,7 +6,10 @@ import TravelTable from "./Partials/TravelTable";
 export default function Travel({ auth, travels }) {
   async function onSubmit(e) {
     e.preventDefault();
-    const result = await fetch("/api/travels", new FormData(e.target));
+    const result = await fetch("/api/travels", {
+      method: "POST",
+      body: new FormData(e.target),
+    });
     if (result.ok) {
       window.location.reload();
     }
