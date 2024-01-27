@@ -22,7 +22,6 @@ class TravelController extends Controller
         $name = $request->travel;
         $message = '';
         $travels = [];
-    
         if ($name) {
             // If a name is provided, search travels by name
             $travels = Travel::where('title', 'like', '%' . $name . '%')

@@ -11,8 +11,10 @@ import DetailTab from "./Partials/DetailTab";
 import WhatsappButton from "@/Components/WhatsappButton";
 import InputTitle from "@/Components/InputTitle";
 import Back from "@/Components/Back";
+import usePhone from "@/Hooks/usePhone";
 
 const Detail = ({ travel, errors }) => {
+  console.log(travel);
   const { data } = travel;
   const fullAddress = `${data.address}, ${data.ward}, ${data.subdistrict}, ${data.regency}`;
   const [activeTab, setActiveTab] = useState({
@@ -39,6 +41,8 @@ const Detail = ({ travel, errors }) => {
       ),
     },
   ];
+  const { phone } = usePhone();
+
   useEffect(() => {
     if (errors.success) {
       alert(errors.success[0]);
@@ -103,7 +107,7 @@ const Detail = ({ travel, errors }) => {
                   </div>
                   <WhatsappButton
                     travel={data}
-                    whatsappNumber={"088227852900"}
+                    whatsappNumber={phone}
                     people={people}
                   >
                     PESAN

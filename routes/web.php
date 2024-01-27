@@ -42,6 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/travels/{id}', [TravelController::class, 'delete'])->name('travel.delete');
 
 });
+Route::get('/phone', [ProfileController::class, 'getPhone']);
 Route::get('/travels', [TravelController::class, 'index'])->name('travel.index');
 Route::get('/travels/all', [TravelController::class, 'all'])->name('travel.all');
 Route::get('/travels/{id}', [TravelController::class, 'detail'])->name('travel.detail');
