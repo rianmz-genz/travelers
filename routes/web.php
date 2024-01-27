@@ -38,9 +38,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/travels/dashboard', [TravelController::class, 'dashboard'])->name('travel.dashboard.index');
-    Route::post('/travels', [TravelController::class, 'store'])->name('travel.store');
     Route::delete('/travels/{id}', [TravelController::class, 'delete'])->name('travel.delete');
-
+    
 });
 Route::get('/phone', [ProfileController::class, 'getPhone']);
 Route::get('/travels', [TravelController::class, 'index'])->name('travel.index');

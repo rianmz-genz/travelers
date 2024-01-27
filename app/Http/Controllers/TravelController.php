@@ -66,9 +66,9 @@ class TravelController extends Controller
          $validator = Validator::make($request->all(), [
             'title' => 'required|string',
             'description' => 'required|string',
-            'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif|max:20480',
             'images' => 'required|array',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:20480',
             'address' => 'required|string',
             'ward' => 'required|string',
             'subdistrict' => 'required|string',
@@ -79,9 +79,11 @@ class TravelController extends Controller
 
         // Cek validasi
         if ($validator->fails()) {
-            return redirect()->back()
-                ->withErrors($validator)
-                ->withInput();
+            return response()->json([
+                'error' => 'Validation failed',
+                'messages' => $validator->errors(),
+            ], 422);
+            
         }
 
         // Simpan thumbnail
@@ -108,7 +110,9 @@ class TravelController extends Controller
             'province' => $request->input('province'),
             'price' => $request->input('price'),
         ]);
-        return redirect()->route('travel.dashboard.index');
+        return response()->json([
+            'p'
+        ],200);
     }
 
     public function detail($id) {
