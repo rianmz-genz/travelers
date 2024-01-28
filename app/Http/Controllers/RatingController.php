@@ -13,17 +13,19 @@ class RatingController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'nullable|string',
             'comment' => 'required|string',
-            'rating' => 'required',
+            'rating' => 'required|integer|between:1,5',
             'images' => 'required|array',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:20480',
             'travel_id' => 'required',
         ]);
 
         // Validate input
         if ($validator->fails()) {
-            return redirect()->back()
-                ->withErrors($validator)
-                ->withInput();
+            return response()->json([
+                'error' => 'Validation failed',
+                'messages' => $validator->errors(),
+            ], 422);
+            
         }
 
         // Save images
@@ -36,7 +38,7 @@ class RatingController extends Controller
 
         // Save to the database
         Rating::create([
-            'name' => $request->input('name'),
+            'name' => $request->input('name') ?? 'Guest',
             'comment' => $request->input('comment'),
             'rating' => $request->input('rating'),
             'images' => $imagePaths,
@@ -53,6 +55,6 @@ class RatingController extends Controller
         // Save the updated travel
         $travel->save();
 
-        return redirect()->route('travel.detail', [$request->input('travel_id')])->withErrors('Berhasil menambhkan review', 'success');
+        return response()->json(['message' => 'success'], 200);
     }
 }

@@ -17,12 +17,29 @@ const DetailRating = ({ travelId, ratings, isSuccess, rating }) => {
   const totalTwoStar = ratings.filter((rating) => rating.rating === 2).length;
   const totalOneStar = ratings.filter((rating) => rating.rating === 1).length;
   const totalData = ratings.length;
+  const [errorModal, setErrorModal] = useState(false);
+  const [errorMessages, setErrorMessages] = useState([]);
+
+  useEffect(() => {
+    // Check if there are error messages, and show the error modal automatically
+    if (errorMessages.length > 0) {
+      setErrorModal(true);
+    }
+  }, [errorMessages]);
   async function onSubmit(e) {
     e.preventDefault();
-    router.post("/ratings", new FormData(e.target));
-    setTimeout(() => {
-      setIsCreateMode(false);
-    }, 500);
+    const result = await fetch("/api/ratings", {
+      method: "POST",
+      body: new FormData(e.target),
+    });
+    if (result.ok) {
+      window.location.reload();
+    } else {
+      const data = await result.json();
+      console.log(data.messages);
+      const formattedErrorMessages = Object.entries(data.messages).flat();
+      setErrorMessages(formattedErrorMessages || []);
+    }
   }
   // console.log((totalFiveStar / totalData) * 100);
   const generatePercent = () => {
@@ -72,6 +89,31 @@ const DetailRating = ({ travelId, ratings, isSuccess, rating }) => {
   ];
   return (
     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+      <input
+        type="checkbox"
+        id="error_modal2"
+        className="modal-toggle"
+        checked={errorModal}
+      />
+      <div className="modal" role="dialog">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg">Error!</h3>
+          {errorMessages.map((message, index) => (
+            <div key={index} className="py-2">
+              {message}
+            </div>
+          ))}
+          <div className="modal-action">
+            <label
+              htmlFor="error_modal2"
+              className="btn"
+              onClick={() => setErrorModal(false)}
+            >
+              Close
+            </label>
+          </div>
+        </div>
+      </div>
       <div className=" px-4 py-12 md:p-6 relative">
         {!isSuccess && (
           <PrimaryButton

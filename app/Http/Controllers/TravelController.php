@@ -67,7 +67,7 @@ class TravelController extends Controller
             'title' => 'required|string',
             'description' => 'nullable|string',
             'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif|max:20480',
-            'images' => 'nullable|array',
+            'images' => 'nullable|array', // Make 'images' nullable
             'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:20480',
             'address' => 'nullable|string',
             'ward' => 'nullable|string',
@@ -92,10 +92,12 @@ class TravelController extends Controller
         
         // Simpan images
         $imagePaths = [];
-        foreach ($request->file('images') as $image) {
-            $path = $image->store('images', 'public');
-            $uploadedImage = url('storage/' . $path);
-            $imagePaths[] = $uploadedImage;
+        if($request->file('images')) {
+            foreach ($request->file('images') as $image) {
+                $path = $image->store('images', 'public');
+                $uploadedImage = url('storage/' . $path);
+                $imagePaths[] = $uploadedImage;
+            }
         }
         // Simpan ke database
         Travel::create([

@@ -18,14 +18,7 @@ const CreateRatingForm = ({ onSubmit, travelId }) => {
     setImages(images.filter((_, index) => index !== i));
   };
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        if (rating == 0) return;
-        onSubmit(e);
-      }}
-      className="py-8"
-    >
+    <form onSubmit={onSubmit} className="py-8">
       <input type="hidden" value={travelId} name="travel_id" />
       <h1 className="absolute top-0 left-0 bg-neutral text-white px-4 py-2 rounded-br-lg">
         Buat Review
