@@ -14,17 +14,17 @@ return new class extends Migration
         Schema::create('travels', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->string('thumbnail');
-            $table->json('images');
-            $table->string('address');
-            $table->string('ward');
-            $table->string('subdistrict');
-            $table->string('regency');
-            $table->string('province');
+            $table->json('images')->nullable();
+            $table->string('address')->nullable();
+            $table->string('ward')->nullable();
+            $table->string('subdistrict')->nullable();
+            $table->string('regency')->nullable();
+            $table->string('province')->nullable();
             $table->integer('rating_count')->nullable();
             $table->integer('rating')->nullable();
-            $table->integer('price');
+            $table->integer('price')->nullable();
             $table->timestamps();
         });
     }

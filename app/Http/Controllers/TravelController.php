@@ -65,16 +65,16 @@ class TravelController extends Controller
          // Validasi input
          $validator = Validator::make($request->all(), [
             'title' => 'required|string',
-            'description' => 'required|string',
+            'description' => 'nullable|string',
             'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif|max:20480',
-            'images' => 'required|array',
+            'images' => 'nullable|array',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:20480',
-            'address' => 'required|string',
-            'ward' => 'required|string',
-            'subdistrict' => 'required|string',
-            'regency' => 'required|string',
-            'province' => 'required|string',
-            'price' => 'required|integer',
+            'address' => 'nullable|string',
+            'ward' => 'nullable|string',
+            'subdistrict' => 'nullable|string',
+            'regency' => 'nullable|string',
+            'province' => 'nullable|string',
+            'price' => 'nullable|integer',
         ]);
 
         // Cek validasi
@@ -111,7 +111,7 @@ class TravelController extends Controller
             'price' => $request->input('price'),
         ]);
         return response()->json([
-            'p'
+            'message' => 'success'
         ],200);
     }
 
